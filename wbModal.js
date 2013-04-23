@@ -17,22 +17,22 @@ define("wbModal", function(){
             this.modal +="\n</div>" +
                        "\n<div class='modal-body'></div>" +
                        "\n<div class='modal-footer'>";
-            if(foot)this.modal +="\n<h3 id='modalFoot'>"+foot+"</h3>";
-            this.modal +="\n<button class='btn' data-dismiss='modal' aria-hidden='true'>Close</button>" +
+            if(foot)this.modal +="\n<h3 id='modalFoot' style='display: inline-block; text-align: center;  '>"+foot+"</h3>";
+            this.modal +="<button class='btn' data-dismiss='modal' aria-hidden='true'>Close</button>" +
                          "\n</div>" +
                    "\n</div><!-- Modal End-->";
                $('body').append(this.modal);
             Modal.prototype.show = function(){ //Display modal
                 $('#exceptionModal').modal('show');
-            }
+            };
             Modal.prototype.close = function(){ //Close
                 $('.modal-header').find(".close").click();
-            }
+            };
             Modal.prototype.closeDelay = function(delay){ //Close with delay
                 setTimeout(function() {         //written  to get some delay
                     $('.modal-header').find(".close").click();
                 }, delay);
-            }
+            };
             Modal.prototype.putRed = function (redMessage){
                 var head = 'head' in redMessage ? redMessage.head : 'Error..!'; //If head index is in array it will assign the redMessage.head value to head variable othervise defual value will be assgined.
                 var redHTML = "<div class='alert alert-block alert-error'>" +
@@ -42,7 +42,7 @@ define("wbModal", function(){
                                "\n</div>";
                 $('.modal-body').append(redHTML);  //To create alert box in model and errorHTML is a varible define in document.ready
                 $('div[class="alert alert-block alert-error"] > span').text(redMessage.body); //To place error message in alert box of model.
-            }
+            };
             Modal.prototype.putBlue = function (blueMessage){
                 var head = 'head' in blueMessage ? blueMessage.head : 'Information'; //If head index is in array it will assign the blueMessage.head value to head variable othervise defual value will be assgined.
                 var blueHTML="<div class='alert alert-block alert-info'>" +
@@ -52,7 +52,7 @@ define("wbModal", function(){
                              "\n</div>";
                 $('.modal-body').append(blueHTML);  //To inform there are no error message left in model body and infoHTML is a varible define in document.ready
                 $('div[class="alert alert-block alert-info"] > span').text(blueMessage.body); //To place error message in alert box of model.
-            }
+            };
             Modal.prototype.putGreen = function (greenMessage){
                 var head = 'head' in greenMessage ? greenMessage.head : 'Success'; //If head index is in array it will assign the greenMessage.head value to head variable othervise defual value will be assgined.
                 var greenHTML="<div class='alert alert-block alert-success'>" +
@@ -62,10 +62,14 @@ define("wbModal", function(){
                             "\n</div>";
                 $('.modal-body').append(greenHTML);  //To inform there are no error message left in model body and infoHTML is a varible define in document.ready
                 $('div[class="alert alert-block alert-success"] > span').text(greenMessage.body); //To place error message in alert box of model.
-            }
+            };
             Modal.prototype.putHTML = function (HTML){
                 $('div[id="exceptionModal"] > div[class="modal-body"]').append(HTML);
-            }
+            };
+
+            Modal.prototype.cleanHTML = function (){
+                $('div[id="exceptionModal"] > div[class="modal-body"]').html("");
+            };
 
         }
     return Modal;
@@ -79,4 +83,5 @@ define("wbModal", function(){
 //    test.putGreen({'body':"This is putGreen"});
 //    test.putHTML("This is putHTML");
 //    test.show();
+//    test.cleanHTML();
 //});
